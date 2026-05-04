@@ -59,3 +59,50 @@ Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/
 ---
 
 <sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+
+## Community management setup (zone-wise)
+
+This project now includes two content-types for a community app:
+
+- **Zone**: master list of zones (for example: North Zone, East Zone).
+- **Member**: families/members linked to one zone.
+
+### Suggested admin role model
+
+In Strapi Admin (`Settings -> Administration Panel -> Roles`), create these roles:
+
+1. **Super Admin**
+   - Full access.
+   - Only this role should have create/update/delete permission for **Zone**.
+2. **Zonal Admin**
+   - Read Zone.
+   - Create/update/read Member (scope by zone using review workflow or custom policy if needed).
+3. **Staff**
+   - Read Zone.
+   - Read/create Member (optional update based on your process).
+
+> Note: Strapi RBAC can restrict by content-type action. Zone-level row filtering is typically implemented with custom policies/controllers.
+
+### Field mapping from your sample sheet
+
+- `HEAD OF THE FAMILY NAME` -> `headOfFamilyName`
+- `CONTACT NO` -> `contactNumber`
+- `BLOOD GROUP` (head) -> `headBloodGroup`
+- `DOB` -> `headDob`
+- `SPOUSE NAME` -> `spouseName`
+- `BLOOD GROUP` (spouse) -> `spouseBloodGroup`
+- `KIDS NAMES` -> `kidsNames`
+- `BLOOD GROUP` (kids) -> `kidsBloodGroups`
+- `ANNIVERSARY` -> `anniversary`
+- `EMAIL ID` -> `email`
+- `ADDRESS` -> `address`
+- Zone assignment -> `zone`
+
+### Import suggestion
+
+Use the Strapi Import/Export plugin or CSV import plugin to bulk upload members.
+Before import:
+
+- Create zone records first (by Super Admin).
+- Normalize date values to `YYYY-MM-DD`.
+- Use one zone column in the CSV to map each member to the zone relation.
