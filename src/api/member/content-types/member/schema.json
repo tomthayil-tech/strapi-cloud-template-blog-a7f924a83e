@@ -1,0 +1,65 @@
+{
+  "kind": "collectionType",
+  "collectionName": "members",
+  "info": {
+    "singularName": "member",
+    "pluralName": "members",
+    "displayName": "Member",
+    "description": "Family/member registry grouped by zone"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "headOfFamilyName": {
+      "type": "string",
+      "required": true
+    },
+    "contactNumber": {
+      "type": "string",
+      "required": true
+    },
+    "headBloodGroup": {
+      "type": "enumeration",
+      "enum": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Unknown"],
+      "default": "Unknown"
+    },
+    "headDob": {
+      "type": "date"
+    },
+    "spouseName": {
+      "type": "string"
+    },
+    "spouseBloodGroup": {
+      "type": "enumeration",
+      "enum": ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "Unknown"],
+      "default": "Unknown"
+    },
+    "kidsNames": {
+      "type": "text"
+    },
+    "kidsBloodGroups": {
+      "type": "text"
+    },
+    "anniversary": {
+      "type": "date"
+    },
+    "email": {
+      "type": "email"
+    },
+    "address": {
+      "type": "text"
+    },
+    "zone": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::zone.zone",
+      "inversedBy": "members",
+      "required": true
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}
